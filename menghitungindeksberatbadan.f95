@@ -6,6 +6,7 @@ integer, dimension(3) :: usia
 real, dimension(3) :: beratbadan, tinggi, bmi
 integer :: i
 
+! Menggunakan looping do untuk memasukan banyak data (ex: 3 data)
 do i = 1,3
 write(*,'(20a)',advance='no') "Masukan Nama Anda:"
 read*, nama(i)
@@ -18,9 +19,11 @@ read*, tinggi(i)
 
 write(*,*)""
 end do
+! akhir dari looping do
 
 ! Menyimpan variabel ke dalam file dengan format kolom
 open(unit=2, file='data2.txt', status='replace')
+! Menggunakan looping do untuk setiap perhitungan yang akan disimpan ke dalam file
 do i = 1,3
 ! Konversi satuan tinggi dari cm ke meter
 tinggi(i) = tinggi(i)/100
@@ -28,7 +31,7 @@ tinggi(i) = tinggi(i)/100
 ! Htiung BMI
 bmi(i) = beratbadan(i)/(tinggi(i)**2)
 
-! Klasifikasi
+! Klasifikasi menggunakan IF-ELSE 
 if (bmi(i) < 15) then
 klasifikasi(i) = 'Sangat-sangat kurus'
 elseif (bmi(i) > 15 .and. bmi(i) < 16) then
@@ -51,7 +54,8 @@ end if
 write(*,'(a20,i10,f10.2,f10.2,f10.2,5x,a20)') nama(i), usia(i), beratbadan(i), tinggi(i), bmi(i), klasifikasi(i)
 write(2,'(a20,i10,f10.2,f10.2,f10.2,5x,a20)') nama(i), usia(i), beratbadan(i), tinggi(i), bmi(i), klasifikasi(i)
 end do
-close(2)
+! akhir dari looping do
+close(2) ! penyimpanan file selesai
 
 
 end program
